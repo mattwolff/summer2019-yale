@@ -1,0 +1,99 @@
+@@font-face {
+
+}
+
+body {
+  background: #f1f1f1;
+  font-size: 18px;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  font-family: "ArialNarrow", "Helvetica", "Arial", sans-serif;
+}
+
+h1 {
+  color: black;
+  font-size: 1em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none;
+  border-bottom: 2px solid black;
+}
+
+a:active {
+  color: blue;
+  border-color: blue;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  height: 2px;
+  background: black;
+}
+
+h1, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin-bottom: 1em;
+}
+
+li {
+  list-style-type:square;
+  margin-left: 1.2em;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+header a {
+  display: block;
+  width: 1em;
+  height: 1em;
+  background: black;
+}
+
+header a:hover {
+  background: blue;
+}
+
+nav .col {
+  /* width: 33.333%; */
+  padding-right: 4em;
+}
+
+::selection {
+  color: white;
+  background: rgba(0,0,0,.99);
+}
+
+::-moz-selection {
+  color: white;
+  background: rgba(0,0,0,.99);
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,126 @@
+/* This is a comment! */
+
+/*
+  "*" is the universal selector.
+  It applies to every element on the page.
+  "box-sizing: border-box"
+  means the borders, padding, width and height
+  of all(*) elements is included in its Box Model   */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: white;
+  color: black;
+  /*
+    Default margin on the body is 8px on all sides
+    I can change the margin like this:
+      margin-top: .5em;
+      margin-right: .5em;
+      margin-bottom: .5em;
+      margin-left: .5em;
+    like this:
+      margin: .5em .5em;
+        first number = top/bottom, second number = right/left
+    Or just like this:  */
+  margin: .5em;
+}
+
+h1 {
+  margin: 0;
+  width: 100%;
+  font-size: initial;
+  font-weight: normal;
+}
+
+.container {
+  display: flex;
+  background: rgba(255,0,0,.1);
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: .5em;
+  margin-bottom: .5em;
+}
+
+.xfs {
+  justify-content: flex-start;
+}
+
+.xjc {
+  justify-content: center;
+}
+
+.xfe {
+  justify-content: flex-end;
+}
+
+.xsb {
+  justify-content: space-between;
+}
+
+.xsa {
+  justify-content: space-around;
+}
+
+
+.column {
+  background: rgba(255,255,255,.75);
+  padding: .25em .5em;
+  margin: .125em;
+  border: 1px solid black;
+  text-align: center;
+  cursor: default;
+}
+
+.column:hover {
+  border-color: yellow;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(255,255,0)
+}
+
+.col-1 {width: 10%;}
+.col-2 {width: 20%;}
+.col-3 {width: 30%;}
+.col-4 {width: 40%;}
+.col-5 {width: 50%;}
+.col-6 {width: 60%;}
+.col-7 {width: 70%;}
+.col-8 {width: 80%;}
+.col-9 {width: 90%;}
+.col-10 {width: 100%;}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+  You can ~decorate~ your comment block
+  if it want a more obvious or visual
+  breaking point in your code. */
+
+/* =========================== */
+/* ==    MEDIA QUERIES!!!   == */
+/* =========================== */
+
+@media screen and (max-width: 1024px) {
+  .container {
+    background: rgb(0,0,255,.1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    background: rgb(0,255,0,.1);
+  }
+}
+
+/* For when you print the page */
+@media print {
+
+}
