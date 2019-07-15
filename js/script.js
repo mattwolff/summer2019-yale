@@ -1,8 +1,8 @@
-let pizza = document.querySelector("body");
-// let body = document.querySelector("body");
+let elem = document.querySelector("#elem");
+let body = document.querySelector("body");
 
-pizza.onclick = function() {
-  // pizza.classList.toggle("invert");
+elem.onclick = function() {
+  body.classList.toggle("invert");
 }
 
 
