@@ -86,6 +86,22 @@ nav .col {
   background: rgba(0,0,0,.99);
 }
 
+.invert {
+  background: black;
+}
+
+.invert hr {
+  background: white;
+}
+
+.invert * {
+  color: white;
+}
+
+button {
+  width: 200px;
+}
+
 @media screen and (max-width: 1024px) {
   body {
     font-size: 16px;
