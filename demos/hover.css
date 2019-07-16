@@ -26,9 +26,11 @@ p {
 
 .block:hover p {
   color: red;
+  font-size: 24px;
   opacity: 1;
 }
 
 .block:hover img {
   opacity: .5;
+  transform: rotate(12deg) scale(1.1);
 }
