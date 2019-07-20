@@ -99,7 +99,35 @@ nav .col {
 }
 
 button {
-  width: 200px;
+  position: fixed;
+  bottom: 0;
+  left: 8px;
+  padding: 0;
+  margin: 0;
+  font-size: 2em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(0deg);
+  transition: transform 10s ease;
+}
+
+button:hover {
+  transform: rotate(3600deg);
+}
+
+#dots {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
 }
 
 @media screen and (max-width: 1024px) {
