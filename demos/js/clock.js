@@ -7,16 +7,21 @@ let block = document.querySelector("#time");
 
 setInterval(function() {
   time();
-}, 1000);
+}, 30);
 
 time();
 
 function time() {
-  let hours = new Date().getHours();
-  let mins = new Date().getMinutes();
-  let secs = new Date().getSeconds();
+  let d = new Date();
+  let hours = d.getHours();
+  let mins = d.getMinutes();
+  let secs = d.getSeconds();
+  let ms = d.getMilliseconds();
 
-  block.style.transform = `rotate(${(secs/60) * 360}deg)`;
+  // This is bad math...
+  let smooth = ((secs + ms / 1000.0) / 60.0) * 360;
+
+  block.style.transform = `rotate(${smooth}deg)`;
 
   // Leading zeroes
   if (hours.toString().length < 2) {
@@ -40,3 +45,24 @@ function time() {
   min.innerHTML = mins;
   sec.innerHTML = secs;
 }
+
+
+// there is a Clock
+// we check what time it is every second
+
+//
+// if time is between 1 and 2 pm show procrastinate
+// if time is 3:15pm show pet dog
+
+//
+//
+// let age5 = ["/frown.png", "/smile.png", "/willow.jpg"];
+// for (let i = 0; i < age5.length; i++) {
+//   console.log(age5[i]);
+// }
+//
+// let img = document.querySelector("img");
+// img.setAttribute("src", '../images' + age5[0]);
+//
+//
+//
