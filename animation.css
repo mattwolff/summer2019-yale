@@ -1,0 +1,129 @@
+/* This is a comment! */
+
+/*
+  "*" is the universal selector.
+  It applies to every element on the page.
+  "box-sizing: border-box"
+  means the borders, padding, width and height
+  of all(*) elements is included in its Box Model   */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f1f1f1;
+  color: blue;
+  margin: .5em;
+}
+
+/* Each animation is given a unique name */
+/* I have three animations total */
+
+@keyframes sq-spin {
+    0% {
+      background-color: blue;
+      transform: rotate(0deg);
+    }
+    50% {
+      background-color: red;
+      width: 150px;
+      height: 150px;
+      transform: rotate(90deg);
+    }
+    100% {
+      background-color: blue;
+      transform: rotate(180deg);
+    }
+}
+@keyframes sq-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      width: 150px;
+      height: 150px;
+      transform: rotate(90deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+}
+
+@keyframes circ {
+    from {
+      border-radius: 50%;
+    }
+    to {
+      border-radius: 25%;
+    }
+}
+
+@keyframes chew {
+    0% {
+      height: 2px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+    50% {
+      height: 25px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+    100% {
+      height: 2px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+}
+
+#square {
+  position: fixed;
+  top: 25%;
+  left: 12.5%;
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  animation: sq-spin 2000ms infinite;
+  transform-origin: center;
+}
+
+#square:hover, #circle:hover {
+  border: 30px solid blue;
+  background: black;
+}
+
+#line:hover {
+  background: black;
+  border: 2px solid blue;
+}
+
+#circle {
+  position: fixed;
+  top: 5%;
+  right: 12.5%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: blue;
+  animation: circ 1000ms infinite ease-in-out;
+  animation-direction: alternate;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 25%;
+}
+
+#line {
+  width: 50%;
+  padding: 0 2em;
+  height: 2px;
+  background-color: blue;
+  animation: chew 1000ms infinite;
+}
