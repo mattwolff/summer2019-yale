@@ -87,13 +87,16 @@ let images = [
 // Just declaring a few variables
 let wrap = document.querySelector(".wrap");
 let imgs = document.querySelectorAll(".wrap img");
-let age = document.querySelector("#age")
+let age = document.querySelector("#age");
+let eonSpan = document.querySelector("#eon");
 let initialAge = -1;
 
 // Here we run some function called "time()" every second!
 setInterval(function() {
 	time();
 }, 1000);
+
+time();
 
 // This is that "time()" function we run every second!
 function time() {
@@ -103,72 +106,97 @@ function time() {
   let minutes = d.getMinutes();
   let seconds = d.getSeconds();
 
-
-  // Here's a variable to divide 24 day into some number of parts
+  // Here's a variable to divide 24hr day into some number of parts
   // We use images.length so that you can always add another year.
   // 16 years would mean 90-minute segments
   // 2 years would means 12-hour segments
   let percentOfDay = (hours * 60 + minutes) / 1440;
 
+  let percentOfHour = seconds/60;
+
   // For this example, I can instead do everything in 60 seconds
   // let percentOfDay = seconds / 60;
 
   // This should allow the function to work with any number of years
-  let calcAge = Math.floor(percentOfDay * images.length);
+  let rawAge = percentOfHour * images.length;
+  let calcAge = Math.floor(percentOfHour * images.length);
 
-  // The eon is a variable to detemine how much time should it should take before a new image appears. This variable is currently incorrect...
-  let eon = 1440 / images.length;
+  // The eon is a variable to detemine how much time should it should take before a new set of images should appear.
+  // let eon = 1440 / images.length;
+  let eon = 60 / images.length;
 
-  let delay = eon / images[calcAge].srcs.length;
+  // The delay is the amount of time between images in this eon.
+  let duration = eon / images[calcAge].srcs.length;
+
+  // function getMinutesUntilNextEon() {
+  //   return duration - new Date().getMinutes();
+  // }
+
+  function getPercentageOfEon() {
+    return rawAge - calcAge;
+  }
+
+  // this returns where in the images array we are...
+  srcsPosition = Math.floor(getPercentageOfEon() * images[calcAge].srcs.length);
+  console.log(seconds);
+
+  eonSpan.innerHTML = `, Eon Image Index: ${srcsPosition}`;
+
 
   // Check to see if you've aged in your new time schema
   if (calcAge > initialAge) {
     initialAge = calcAge;
-    console.log("Older by a year!!!", delay, calcAge, initialAge);
-    console.log(seconds, `Age: ${calcAge + 1}`);
+    console.table("Older by a year!!!", duration, images[calcAge].srcs.length);
+    console.log(`Age: ${calcAge + 1}`);
 
-    age.innerHTML = `Age: ${calcAge + 1}, Images: ${images[calcAge].srcs.length}`;
+    age.innerHTML = `Older by a year!!! Age: ${calcAge + 1}, Images: ${images[calcAge].srcs.length}`;
 
+    // Restart from a blank canvas
     wrap.innerHTML = "";
-    // For each means do this for however many images there are
-    images[calcAge].srcs.forEach(function(image, i) {
-      setTimeout(function() {
-        // console.log(image, i);
-        // create a new HTML img element!
-        let newImage = document.createElement("img");
-        // Set the img src attribute
-        newImage.src = `../images/${image}`;
-        // Set the id
-        newImage.id = images[calcAge].ids[i];
 
-        // Append Child means add this new img element to the page.
+    // This is a catch for when we load the page midway through a cycle...
+    if (srcsPosition !== 0) {
+      console.log("halfway through a set! Load Everything so far");
+      for (let i = 0; i <= srcsPosition; i++) {
+        let newImage = document.createElement("img");
+        let image = images[calcAge].srcs[i];
+        newImage.src = `../images/${image}`;
+        newImage.id = images[calcAge].ids[i];
         wrap.appendChild(newImage);
-      }, Math.floor(i * delay * 1000));
-      // SetTimeout is a function that runs after a certain amount of delay...
-      // our delay is based on how many items are in the array.
-      // * 1000 puts that number in milliseconds
-    });
+      }
+    }
+    else {
+      // For each means do this for however many images there are
+      for (let i = 0; i < images[calcAge].srcs.length; i++) {
+        // setTimeout(function() {
+          let image = images[calcAge].srcs[i];
+          let newImage = document.createElement("img");
+          newImage.src = `../images/${image}`;
+          newImage.id = images[calcAge].ids[i];
+          wrap.appendChild(newImage);
+        // }, Math.floor(i * duration * 1000));
+      }
+    }
   }
   // Otherwise, start over!
   // We run this weird check so it doesn't constantly fire...
   else if (calcAge == 0 && initialAge !== 0) {
     initialAge = calcAge;
-    console.log("BABY AGAIN!!!", delay, calcAge, initialAge);
+    console.log("BABY AGAIN!!!", duration, calcAge, initialAge);
     console.log(seconds, `Age: ${calcAge + 1}`);
 
     age.innerHTML = `Age: ${calcAge + 1}, Images: ${images[calcAge].srcs.length}`;
-
     wrap.innerHTML = "";
 
     images[calcAge].srcs.forEach(function(image, i) {
-      setTimeout(function() {
+      // setTimeout(function() {
         // console.log(image, i);
         let newImage = document.createElement("img");
         newImage.src = `../images/${image}`;
         newImage.id = images[calcAge].ids[i];
 
         wrap.appendChild(newImage);
-      }, Math.floor(i * delay * 1000));
+      // }, Math.floor(i * duration * 1000));
     });
   }
 
